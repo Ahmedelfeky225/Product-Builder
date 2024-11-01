@@ -1,4 +1,5 @@
 import ImageCard from "./ImageCard"
+import Button from "./ui/Button"
 interface IProps{
 
 }
@@ -20,8 +21,8 @@ const ProductCards = ({}:IProps) => {
      <ImageCard imageLink="https://img.freepik.com/free-photo/white-offroader-jeep-parking_114579-4007.jpg?t=st=1730442991~exp=1730446591~hmac=23a6d343a05f588a32a44d437846a7cb236a8bcd51d9c82b40003826a41c81e6&w=740" alt={"product name"} className="rounded-full w-10 h-10 object-bottom"/>
      </div>
     <div className='flex items-center justify-between space-x-2 mt-5'>
-    <button className='bg-indigo-600 text-white p-2 w-full rounded-md'>EDIT</button>
-    <button className='bg-red-600 text-white p-2 w-full rounded-md'>REMOVE</button>
+    <Button className="bg-indigo-600" onClick={()=>{console.log("Clicked")}}>EDIT</Button>
+    <Button className='bg-red-600'>REMOVE</Button>
     </div>
     </div>
   )
