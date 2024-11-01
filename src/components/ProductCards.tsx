@@ -22,7 +22,10 @@ const ProductCards = ({}:IProps) => {
      </div>
     <div className='flex items-center justify-between space-x-2 mt-5'>
     <Button className="bg-indigo-600" onClick={()=>{console.log("Clicked")}}>EDIT</Button>
-    <Button className='bg-red-600'>REMOVE</Button>
+    <Button className='bg-red-600'>DELETE</Button>
+    <Button className='bg-blue-950'>LOADING</Button>
+    <Button className='bg-green-600'>SUCESS</Button>
+    <Button className='bg-gray-300'>CANCEL</Button>
     </div>
     </div>
   )
