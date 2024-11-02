@@ -20,8 +20,10 @@ const ProductCards = ({}:IProps) => {
      <span>$500.000</span>
      <ImageCard imageLink="https://img.freepik.com/free-photo/white-offroader-jeep-parking_114579-4007.jpg?t=st=1730442991~exp=1730446591~hmac=23a6d343a05f588a32a44d437846a7cb236a8bcd51d9c82b40003826a41c81e6&w=740" alt={"product name"} className="rounded-full w-10 h-10 object-bottom"/>
      </div>
+
     <div className='flex items-center justify-between space-x-2 mt-5'>
-    <Button className="bg-indigo-600" onClick={()=>{console.log("Clicked")}} onBlur={()=>{}}>EDIT</Button>
+    <Button className="bg-indigo-600" onClick={()=>{console.log("Clicked")}} onBlur={()=>{}} width="w-full">EDIT</Button>
+
     <Button className='bg-red-600'>DELETE</Button>
     <Button className='bg-blue-950'>LOADING</Button>
     <Button className='bg-green-600'>SUCESS</Button>
