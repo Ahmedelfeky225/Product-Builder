@@ -1,12 +1,12 @@
-import { ReactNode } from "react"
-interface IProps{
+import { ReactNode,ButtonHTMLAttributes } from "react"
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 children : ReactNode;
 className?:string;
-onClick?:()=>void;
 }
-const Button = ({children,className,onClick}:IProps) => {
+const Button = ({children,className,...rest}:IProps) => {
+    console.log({rest})
   return (
-    <button className={`${className} text-white p-2 w-full rounded-md`} onClick={onClick}>{children}</button>
+    <button className={`${className} text-white p-2 w-full rounded-md`} {...rest} >{children}</button>
   )
 }
 
