@@ -1,4 +1,5 @@
 import { IProducts } from "../interfaces";
+import { txtSlicer } from "../utils/functions";
 import ImageCard from "./ImageCard"
 import Button from "./ui/Button"
 interface IProps{
@@ -11,7 +12,7 @@ const ProductCards = ({product}:IProps) => {
       <ImageCard imageLink={imageURL} alt={"product name"} className="rounded-md mb-1"/>
       <h3 className='my-2'>{title}</h3>
       <p>
-      {Description}
+      {txtSlicer(Description,100)}
       </p>
       <div className='flex items-center space-x-2 my-4'>
       <span className='w-5 h-5 bg-indigo-500 rounded-full cursor-pointer'/>

@@ -28,7 +28,7 @@ export const productList :IProducts[]= [
         {
             id: uuid(),
             title: "Gaming Laptop",
-            Description: "A high-performance gaming laptop featuring the latest graphics card and a powerful processor. ",
+            Description: "is a powerful, portable computer specifically designed to handle resource-intensive gaming experiences. Equipped with high-performance hardware, these laptops feature dedicated graphics cards, high-refresh-rate displays (usually 120Hz or higher), and fast processors, often from Intel or AMD. They also come with large memory capacities (usually 16GB or more) and fast storage options like SSDs for quick loading times. Many gaming laptops have advanced cooling systems, customizable RGB lighting, and a sturdy build to withstand intense gaming sessions. These laptops provide a seamless and immersive gaming experience, making them ideal for gamers who need performance on the go ",
             imageURL: "https://img.freepik.com/premium-photo/laptop-with-video-game-screen-fire-screen_1277297-29001.jpg?w=740",
             price: "35.500",
             colors: ["#000080", "#B22222", "#FF8C00", "#8A2BE2"],
