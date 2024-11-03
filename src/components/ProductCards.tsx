@@ -8,11 +8,11 @@ product:IProducts ;
 const ProductCards = ({product}:IProps) => {
   const {imageURL,Description,title,price,category} = product;
   return (
-    <div className='border rounded-md p-2 flex flex-col'>
-      <ImageCard imageLink={imageURL} alt={"product name"} className="rounded-md mb-1"/>
+    <div className='border rounded-md p-2 flex flex-col max-w-sm mx-auto md:max-w-lg  md:mx-0'>
+      <ImageCard imageLink={imageURL} alt={"product name"} className="rounded-md object-cover h-52 "/>
       <h3 className='my-2'>{title}</h3>
       <p>
-      {txtSlicer(Description,100)}
+      {txtSlicer(Description)}
       </p>
       <div className='flex items-center space-x-2 my-4'>
       <span className='w-5 h-5 bg-indigo-500 rounded-full cursor-pointer'/>
@@ -21,7 +21,7 @@ const ProductCards = ({product}:IProps) => {
       </div>
      <div className='flex items-center justify-between'>
      <span>{price}</span>
-     <ImageCard imageLink={category.imageURL} alt={"product name"} className="rounded-full w-10 h-10 object-bottom"/>
+     <ImageCard imageLink={category.imageURL} alt={category.name} className="rounded-full w-10 h-10 object-bottom"/>
      </div>
 
     <div className='flex items-center justify-between space-x-2 mt-5'>

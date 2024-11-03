@@ -17,7 +17,7 @@ export const productList :IProducts[]= [
         id: uuid(),
         title: "Smart LED TV",
         Description: "A 55-inch 4K Ultra HD Smart LED TV that offers vibrant colors, deep contrasts, and a seamless streaming experience. ",
-        imageURL: "https://img.freepik.com/premium-photo/flat-screen-tv-with-sunset-top_1236203-8107.jpg?ga=GA1.1.1891406925.1730442969&semt=ais_hybrid",
+        imageURL: "https://img.freepik.com/premium-photo/flat-screen-tv-is-table-with-beach-scene-it_1150321-4970.jpg?ga=GA1.1.1891406925.1730442969&semt=ais_hybrid",
         price: "1,200 U.S. dollars",
         colors: ["#000000", "#FFFFFF", "#808080", "#FFD700"],
         category: {
@@ -39,7 +39,7 @@ export const productList :IProducts[]= [
         },
         {
             id: uuid(),
-            title: "Mercedes-Benz E200 coupe 2023",
+            title: "Mercedes-Benz E200 2023",
             Description: "The 2020 Mercedes-Benz C300 is a luxury sedan with a 2.0-liter turbocharged engine producing 255 horsepower. ",
             imageURL: "https://img.freepik.com/free-photo/yellow-car-gas-station_23-2150697544.jpg?t=st=1730533412~exp=1730537012~hmac=74ce28e27c31ad82380cf228bac659faf091b7758e6c54d06feaef581bab8b3c&w=740",
             price: "EGP 4,200,000",
