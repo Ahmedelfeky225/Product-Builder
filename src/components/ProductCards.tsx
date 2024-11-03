@@ -8,10 +8,10 @@ product:IProducts ;
 const ProductCards = ({product}:IProps) => {
   const {imageURL,Description,title,price,category} = product;
   return (
-    <div className='border rounded-md p-2 flex flex-col max-w-sm mx-auto md:max-w-lg  md:mx-0'>
+    <div className='border rounded-md p-2 flex flex-col max-w-sm mx-auto md:max-w-lg  md:mx-0 space-y-3'>
       <ImageCard imageLink={imageURL} alt={"product name"} className="rounded-md object-cover h-52 "/>
-      <h3 className='my-2'>{title}</h3>
-      <p>
+      <h3 className='my-2 text-lg font-semibold'>{txtSlicer(title,25)}</h3>
+      <p className="text-xs text-gray-500 break-words">
       {txtSlicer(Description)}
       </p>
       <div className='flex items-center space-x-2 my-4'>
@@ -20,11 +20,11 @@ const ProductCards = ({product}:IProps) => {
       <span className='w-5 h-5 bg-orange-500 rounded-full cursor-pointer'/>
       </div>
      <div className='flex items-center justify-between'>
-     <span>{price}</span>
+     <span className="text-lg text-indigo-600 font-semibold">{price}</span>
      <ImageCard imageLink={category.imageURL} alt={category.name} className="rounded-full w-10 h-10 object-bottom"/>
      </div>
 
-    <div className='flex items-center justify-between space-x-2 mt-5'>
+    <div className='flex items-center justify-between space-x-2 '>
     <Button className="bg-indigo-600" onClick={()=>{console.log("Clicked")}} onBlur={()=>{}} width="w-full">EDIT</Button>
 
     <Button className='bg-red-600'>DELETE</Button>
