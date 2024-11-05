@@ -1,5 +1,5 @@
 import {v4 as uuid} from "uuid";
-import { IProducts } from "../interfaces";
+import { IInput, IProducts } from "../interfaces";
 export const productList :IProducts[]= [
     {
         id:uuid(),
@@ -53,3 +53,29 @@ export const productList :IProducts[]= [
     
 ]
 
+export const formInputList:IInput[]=[
+    {
+        type:"text",
+        name:"title",
+        id:"title",
+        label:"Product Title"
+    },
+    {
+        type:"text",
+        name:"description",
+        id:"desc",
+        label:"Product Description "
+    },
+    {
+        type:"text",
+        name:"imageURL",
+        id:"image",
+        label:"Product Image URL"
+    },
+    {
+        type:"text",
+        name:"price",
+        id:"price",
+        label:"Product Price"
+    }
+]

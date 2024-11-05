@@ -12,3 +12,9 @@ export interface IProducts{
 }
 
 
+export interface IInput{
+    type:string;
+    name:string;
+    id:string;
+    label:string;
+}
