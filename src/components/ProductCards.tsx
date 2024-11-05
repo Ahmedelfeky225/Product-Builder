@@ -4,8 +4,10 @@ import ImageCard from "./ImageCard"
 import Button from "./ui/Button"
 interface IProps{
 product:IProducts ;
+openModal:()=>void;
 }
-const ProductCards = ({product}:IProps) => {
+const ProductCards = ({product,openModal}:IProps) => {
+
   const {imageURL,Description,title,price,category} = product;
   return (
     <div className='border rounded-md p-2 flex flex-col max-w-sm mx-auto md:max-w-lg  md:mx-0 space-y-3'>
@@ -25,9 +27,9 @@ const ProductCards = ({product}:IProps) => {
      </div>
 
     <div className='flex items-center justify-between space-x-2 '>
-    <Button className="bg-indigo-600" onClick={()=>{console.log("Clicked")}} onBlur={()=>{}} width="w-full">EDIT</Button>
+    <Button type="button" className="bg-indigo-600" onClick={openModal} onBlur={()=>{}} width="w-full">EDIT</Button>
 
-    <Button className='bg-red-600'>DELETE</Button>
+    <Button className='bg-red-600' style={{cursor:"pointer"}}>DELETE</Button>
 
     </div>
     </div>
