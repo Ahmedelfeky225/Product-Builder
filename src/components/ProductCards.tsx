@@ -8,13 +8,13 @@ openModal:()=>void;
 }
 const ProductCards = ({product,openModal}:IProps) => {
 
-  const {imageURL,Description,title,price,category} = product;
+  const {imageURL,description,title,price,category} = product;
   return (
     <div className='border rounded-md p-2 flex flex-col max-w-sm mx-auto md:max-w-lg  md:mx-0 space-y-3'>
       <ImageCard imageLink={imageURL} alt={"product name"} className="rounded-md object-cover h-52 "/>
       <h3 className='my-2 text-lg font-semibold'>{txtSlicer(title,25)}</h3>
       <p className="text-xs text-gray-500 break-words">
-      {txtSlicer(Description)}
+      {txtSlicer(description)}
       </p>
       <div className='flex items-center space-x-2 my-4'>
       <span className='w-5 h-5 bg-indigo-500 rounded-full cursor-pointer'/>
