@@ -33,13 +33,17 @@ const App = () => {
     )
     }
   const RenderList = productList.map(product=><ProductCards key={product.id} openModal={openModal} product={product}/>)
-  const renderInputList=formInputList.map(input=> 
-    <div key={input.name} className="flex flex-col">
-        <label htmlFor={input.id} className="mb-[2px] text-sm font-medium text-gray-500">{input.label}</label>
-        <Input value={""} type={input.type} id={input.id} name={input.name} onChange={onChangeHandler}/>
-    </div>
-  
+  const renderInputList=formInputList.map(input=> {
+    return (
+      <div key={input.name} className="flex flex-col">
+      <label htmlFor={input.id} className="mb-[2px] text-sm font-medium text-gray-500">{input.label}</label>
+      <Input value={product[input.name]} type={input.type} id={input.id} name={input.name} onChange={onChangeHandler}/>
+  </div>
+    )
+  }
 )
+console.log(product)
+
   return (
     <div className='container'>
       <Button className='bg-indigo-600' onClick={openModal}>Add</Button>

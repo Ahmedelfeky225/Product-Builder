@@ -14,7 +14,7 @@ export interface IProducts{
 
 export interface IInput{
     type:string;
-    name:string;
+    name:"title" | "description" | "imageURL" | "price";
     id:string;
     label:string;
 }
