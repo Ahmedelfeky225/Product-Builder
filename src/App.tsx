@@ -5,6 +5,7 @@ import { formInputList, productList } from './data'
 import  Button  from './components/ui/Button'
 import  Input  from './components/ui/Input'
 import { IProducts } from './interfaces'
+import { productValidation } from './validation'
 
 
 //** */ Render
@@ -44,7 +45,10 @@ closeModal()
 
 const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
   evt.preventDefault();
-  console.log(product);
+  const errors=productValidation({title:product.title,description:product.description,imageURL:product.imageURL,price:product.price})
+  console.log(errors)
+    // console.log(product);
+
 }
 
 //  -----------> Handlers  <---------------   //
