@@ -36,15 +36,17 @@ const App = () => {
     }
     )
     }
-  const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
-      evt.preventDefault();
-      console.log(product);
-  }
 
 const onCancel= ():void => {
 setProduct(defaultProduct)
 closeModal()
 }
+
+const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
+  evt.preventDefault();
+  console.log(product);
+}
+
 //  -----------> Handlers  <---------------   //
 
   const RenderList = productList.map(product=><ProductCards key={product.id} openModal={openModal} product={product}/>)
