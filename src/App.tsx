@@ -6,6 +6,7 @@ import  Button  from './components/ui/Button'
 import  Input  from './components/ui/Input'
 import { IProducts } from './interfaces'
 import { productValidation } from './validation'
+import ErrorMessage from './components/ErrorMessage'
 
 
 //** */ Render
@@ -23,6 +24,7 @@ const App = () => {
 }
   const [isOpen, setIsOpen] = useState(false)
   const [product,setProduct]=useState<IProducts>(defaultProduct)
+  const [errors,setErrors]=useState({ title:"",description:"",imageURL:"",price:"",})
 
 //  -----------> Handlers  <---------------   //
 
@@ -49,9 +51,11 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
   const errors=productValidation({title,description,imageURL,price})
   console.log(errors)
 
-    const hasErrorMsg= Object.values(errors).every(val=>val=== "") 
+    const hasErrorMsg=Object.values(errors).some(val=>val=== "") && Object.values(errors).every(val=>val=== "") 
     console.log(hasErrorMsg)
-    if(!hasErrorMsg){return}
+    if(!hasErrorMsg){
+      setErrors(errors)
+    }
     console.log("Send This Product to the Server...");
 }
 
@@ -63,14 +67,18 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
       <div key={input.name} className="flex flex-col">
       <label htmlFor={input.id} className="mb-[2px] text-sm font-medium text-gray-500">{input.label}</label>
       <Input value={product[input.name]} type={input.type} id={input.id} name={input.name} onChange={onChangeHandler}/>
+      <ErrorMessage msg={errors[input.name]}/>
   </div>
+  
     )
   }
 )
 
   return (
     <div className='container'>
-      <Button className='bg-indigo-600' onClick={openModal}>Add</Button>
+      <div className='flex justify-center'>
+      <Button className='bg-indigo-600 px-7 py-2 mt-2 mx-auto hover:bg-indigo-700' width='w-fit' onClick={openModal}>Build Project</Button>
+      </div>
      <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 m-6 gap-2 md:gap-4'>
       {RenderList}
      </div>
