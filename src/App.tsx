@@ -44,11 +44,15 @@ closeModal()
 }
 
 const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
-  evt.preventDefault();
-  const errors=productValidation({title:product.title,description:product.description,imageURL:product.imageURL,price:product.price})
+  evt.preventDefault()
+  const {title,description,imageURL,price} = product;
+  const errors=productValidation({title,description,imageURL,price})
   console.log(errors)
-    // console.log(product);
 
+    const hasErrorMsg= Object.values(errors).every(val=>val=== "") 
+    console.log(hasErrorMsg)
+    if(!hasErrorMsg){return}
+    console.log("Send This Product to the Server...");
 }
 
 //  -----------> Handlers  <---------------   //
