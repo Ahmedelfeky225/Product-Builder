@@ -38,6 +38,10 @@ const App = () => {
       [name]:value
     }
     )
+    setErrors({
+      ...errors,
+      [name] : ""
+    })
     }
 
 const onCancel= ():void => {
