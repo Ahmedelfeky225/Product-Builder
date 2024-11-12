@@ -1,12 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import ProductCards from './components/ProductCards'
 import Modal from './components/ui/Modal'
-import { formInputList, productList } from './data'
+import {colors, formInputList, productList } from './data'
 import  Button  from './components/ui/Button'
 import  Input  from './components/ui/Input'
 import { IProducts } from './interfaces'
 import { productValidation } from './validation'
 import ErrorMessage from './components/ErrorMessage'
+import CircleColor from './components/CircleColor'
 
 
 //** */ Render
@@ -77,6 +78,8 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
     )
   }
 )
+const renderCircleColors=colors.map(color=><CircleColor key={color} color={color}/>)
+
 
   return (
     <div className='container'>
@@ -89,6 +92,9 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
      <Modal openStatus ={isOpen} closeModal={closeModal} title={"Add a New Product"}>
      <form className='flex flex-col space-y-3' onSubmit={onSubmitHandler}>
      {renderInputList}
+    <div className='flex items-center space-x-1 flex-wrap'>
+    {renderCircleColors}
+    </div>
      <div className='flex items-center space-x-3'>
       <Button className="bg-indigo-600 hover:bg-indigo-700">Submit</Button>
       <Button className="bg-gray-400 hover:bg-gray-500" onClick={onCancel}>Cancel</Button>
