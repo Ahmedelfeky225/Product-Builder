@@ -81,8 +81,14 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
     )
   }
 )
-const renderCircleColors=colors.map(color=><CircleColor key={color} color={color} onClick={()=>setTempColors(prev=>[...prev,color])}/>)
-
+const renderProductColors=colors.map(color=><CircleColor key={color} color={color} onClick={()=>{
+  if(tempColors.includes(color)){
+    setTempColors(prev=>prev.filter(temp=> temp !== color))
+    return
+  }
+  setTempColors(prev=>[...prev,color])
+}}/>)
+const renderPerviewColors=tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)
 
 
 
@@ -97,8 +103,11 @@ const renderCircleColors=colors.map(color=><CircleColor key={color} color={color
      <Modal openStatus ={isOpen} closeModal={closeModal} title={"Add a New Product"}>
      <form className='flex flex-col space-y-3' onSubmit={onSubmitHandler}>
      {renderInputList}
+    <div className='flex items-center flex-wrap space-x-1'>
+      {renderPerviewColors}
+    </div>
     <div className='flex items-center space-x-1 flex-wrap'>
-    {renderCircleColors}
+    {renderProductColors}
     </div>
      <div className='flex items-center space-x-3'>
       <Button className="bg-indigo-600 hover:bg-indigo-700">Submit</Button>
