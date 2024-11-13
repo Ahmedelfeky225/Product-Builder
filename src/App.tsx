@@ -26,6 +26,9 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [product,setProduct]=useState<IProducts>(defaultProduct)
   const [errors,setErrors]=useState({ title:"",description:"",imageURL:"",price:"",})
+  const [tempColors,setTempColors] = useState<string[]>([])
+
+console.log(tempColors);
 
 //  -----------> Handlers  <---------------   //
 
@@ -49,6 +52,7 @@ const onCancel= ():void => {
 setProduct(defaultProduct)
 closeModal()
 }
+
 
 const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
   evt.preventDefault()
@@ -74,11 +78,12 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
       <Input value={product[input.name]} type={input.type} id={input.id} name={input.name} onChange={onChangeHandler}/>
       <ErrorMessage msg={errors[input.name]}/>
   </div>
-  
     )
   }
 )
-const renderCircleColors=colors.map(color=><CircleColor key={color} color={color}/>)
+const renderCircleColors=colors.map(color=><CircleColor key={color} color={color} onClick={()=>setTempColors(prev=>[...prev,color])}/>)
+
+
 
 
   return (
