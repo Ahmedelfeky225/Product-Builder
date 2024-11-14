@@ -9,6 +9,7 @@ import { productValidation } from './validation'
 import ErrorMessage from './components/ErrorMessage'
 import CircleColor from './components/CircleColor'
 import {v4 as uuid} from "uuid";
+import CustomListbox from './components/CustomListbox'
 
 
 
@@ -117,6 +118,7 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
     <div className='flex items-center space-x-1 flex-wrap'>
     {renderProductColors}
     </div>
+    <CustomListbox/>
      <div className='flex items-center space-x-3'>
       <Button className="bg-indigo-600 hover:bg-indigo-700">Submit</Button>
       <Button className="bg-gray-400 hover:bg-gray-500" onClick={onCancel}>Cancel</Button>
