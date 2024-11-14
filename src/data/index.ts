@@ -1,5 +1,5 @@
 import {v4 as uuid} from "uuid";
-import { IInput, IProducts } from "../interfaces";
+import { IInput, IProducts, IProductsCategories } from "../interfaces";
 export const productList :IProducts[]= [
     {
         id:uuid(),
@@ -101,3 +101,59 @@ export const colors :string[]= [
     "#FF335C"  // 
   ];
   
+
+
+
+
+export const categories:IProductsCategories[] = [ 
+  {
+    id: uuid(),
+    name: "Nike",
+    imageURL: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWxmfHwxfHx8fHwxNjY4MjE4MDE1&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    id: uuid(),
+    name: "T-Shirt",
+    imageURL: "https://images.unsplash.com/photo-1503341733017-1901578f9f1e?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: uuid(),
+    name: "Clothes",
+    imageURL: "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWxmfHx8fHx8fHwxNjY4MjE4MDM2&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    id: uuid(),
+    name: "PC Desktop",
+    imageURL: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWxmfHx8fHx8fHwxNjY4MjE4MDQ3&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    id: uuid(),
+    name: "Shoes",
+    imageURL: "https://plus.unsplash.com/premium_photo-1682435561654-20d84cef00eb?q=80&w=1436&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: uuid(),
+    name: "Watches",
+    imageURL: "https://images.unsplash.com/photo-1507679622673-989605832e3d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: uuid(),
+    name: "Smartphones",
+    imageURL: "https://images.unsplash.com/photo-1722156163505-7d3d5d5dd85a?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: uuid(),
+    name: "Headphones",
+    imageURL: "https://images.unsplash.com/photo-1606400082777-ef05f3c5cde2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: uuid(),
+    name: "Laptops",
+    imageURL: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWxmfHx8fHx8fHwxNjY4MjE4MTAy&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    id: uuid(),
+    name: "Gaming Consoles",
+    imageURL: "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
