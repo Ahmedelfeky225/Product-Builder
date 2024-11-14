@@ -1,14 +1,20 @@
 import { IProducts } from "../interfaces";
 import { txtSlicer } from "../utils/functions";
+import CircleColor from "./CircleColor";
 import ImageCard from "./ImageCard"
 import Button from "./ui/Button"
+
 interface IProps{
 product:IProducts ;
 openModal:()=>void;
 }
 const ProductCards = ({product,openModal}:IProps) => {
 
-  const {imageURL,description,title,price,category} = product;
+  const {imageURL,description,title,price,category,colors} = product;
+
+// Render
+const renderProductColors=colors.map(color=><CircleColor key={color} color={color}/>)
+
   return (
     <div className='border rounded-md p-2 flex flex-col max-w-sm mx-auto md:max-w-lg  md:mx-0 space-y-3'>
       <ImageCard imageLink={imageURL} alt={"product name"} className="rounded-md object-cover h-52 "/>
@@ -17,12 +23,10 @@ const ProductCards = ({product,openModal}:IProps) => {
       {txtSlicer(description)}
       </p>
       <div className='flex items-center space-x-2 my-4'>
-      <span className='w-5 h-5 bg-indigo-500 rounded-full cursor-pointer'/>
-      <span className='w-5 h-5 bg-red-500 rounded-full cursor-pointer'/>
-      <span className='w-5 h-5 bg-orange-500 rounded-full cursor-pointer'/>
+        {renderProductColors}
       </div>
      <div className='flex items-center justify-between'>
-     <span className="text-lg text-indigo-600 font-semibold">{price}</span>
+     <span className="text-lg text-indigo-600 font-semibold">${price}</span>
      <ImageCard imageLink={category.imageURL} alt={category.name} className="rounded-full w-10 h-10 object-bottom"/>
      </div>
 

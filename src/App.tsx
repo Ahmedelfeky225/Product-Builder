@@ -8,6 +8,8 @@ import { IProducts } from './interfaces'
 import { productValidation } from './validation'
 import ErrorMessage from './components/ErrorMessage'
 import CircleColor from './components/CircleColor'
+import {v4 as uuid} from "uuid";
+
 
 
 //** */ Render
@@ -27,8 +29,11 @@ const App = () => {
   const [product,setProduct]=useState<IProducts>(defaultProduct)
   const [errors,setErrors]=useState({ title:"",description:"",imageURL:"",price:"",})
   const [tempColors,setTempColors] = useState<string[]>([])
+  const [products,setProducts]= useState<IProducts[]>(productList)
+  console.log(products);
 
 console.log(tempColors);
+console.log(products);
 
 //  -----------> Handlers  <---------------   //
 
@@ -64,13 +69,18 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
     console.log(hasErrorMsg)
     if(!hasErrorMsg){
       setErrors(errors)
+      return;
     }
-    console.log("Send This Product to the Server...");
+    // console.log("Send This Product to the Server...");
+    setProducts(prev=>[{...product,id:uuid(),colors:tempColors},...prev])
+    setProduct(defaultProduct)
+    setTempColors([])
+    closeModal()
 }
 
 //  -----------> Handlers  <---------------   //
 
-  const RenderList = productList.map(product=><ProductCards key={product.id} openModal={openModal} product={product}/>)
+  const RenderList = products.map(product=><ProductCards key={product.id} openModal={openModal} product={product}/>)
   const renderInputList=formInputList.map(input=> {
     return (
       <div key={input.name} className="flex flex-col">
@@ -88,8 +98,6 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
   }
   setTempColors(prev=>[...prev,color])
 }}/>)
-const renderPerviewColors=tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)
-
 
 
   return (
@@ -103,9 +111,9 @@ const renderPerviewColors=tempColors.map(color=><span key={color} className='p-1
      <Modal openStatus ={isOpen} closeModal={closeModal} title={"Add a New Product"}>
      <form className='flex flex-col space-y-3' onSubmit={onSubmitHandler}>
      {renderInputList}
-    <div className='flex items-center flex-wrap space-x-1'>
-      {renderPerviewColors}
-    </div>
+    {tempColors.length > 0 && <div className='flex items-center flex-wrap space-x-1'>
+      {tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}
+    </div>}
     <div className='flex items-center space-x-1 flex-wrap'>
     {renderProductColors}
     </div>
