@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import ProductCards from './components/ProductCards'
 import Modal from './components/ui/Modal'
-import { colors, formInputList, productList } from './data'
+import { categories, colors, formInputList, productList } from './data'
 import  Button  from './components/ui/Button'
 import  Input  from './components/ui/Input'
 import { IProducts } from './interfaces'
@@ -31,6 +31,8 @@ const App = () => {
   const [errors,setErrors]=useState({ title:"",description:"",imageURL:"",price:"",})
   const [tempColors,setTempColors] = useState<string[]>([])
   const [products,setProducts]= useState<IProducts[]>(productList)
+  const [selected, setSelected] = useState(categories[0])
+
 
   console.log(products);
 
@@ -74,7 +76,7 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
       return;
     }
     // console.log("Send This Product to the Server...");
-    setProducts(prev=>[{...product,id:uuid(),colors:tempColors},...prev])
+    setProducts(prev=>[{...product,id:uuid(),colors:tempColors,category:selected},...prev])
     setProduct(defaultProduct)
     setTempColors([])
     closeModal()
@@ -113,7 +115,7 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
      <Modal openStatus ={isOpen} closeModal={closeModal} title={"Add a New Product"}>
      <form className='flex flex-col space-y-3' onSubmit={onSubmitHandler}>
      {renderInputList}
-     <CustomListbox/>
+     <CustomListbox selected={selected} setSelected={setSelected}/>
 
     {tempColors.length > 0 && <div className='flex items-center flex-wrap space-x-1'>
       {tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}
