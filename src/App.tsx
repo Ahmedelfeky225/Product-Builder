@@ -32,9 +32,10 @@ const App = () => {
   const [tempColors,setTempColors] = useState<string[]>([])
   const [products,setProducts]= useState<IProducts[]>(productList)
   const [selected, setSelected] = useState(categories[0])
-
-
-  console.log(products);
+  const [validateColor,setValidateColor]= useState("")
+  const [productToEdit,setProductToEdit]=useState(defaultProduct)
+console.log("productToEdit",productToEdit)
+  // console.log(products);
 
 console.log(tempColors);
 console.log(products);
@@ -73,18 +74,23 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
     console.log(hasErrorMsg)
     if(!hasErrorMsg){
       setErrors(errors)
-      return;
+      // return;
+    }
+    if(tempColors.length<1){
+      setValidateColor("Please Choose color at least")
+      return
     }
     // console.log("Send This Product to the Server...");
     setProducts(prev=>[{...product,id:uuid(),colors:tempColors,category:selected},...prev])
     setProduct(defaultProduct)
     setTempColors([])
+    setSelected(categories[0])
     closeModal()
 }
 
 //  -----------> Handlers  <---------------   //
 
-  const RenderList = products.map(product=><ProductCards key={product.id} openModal={openModal} product={product}/>)
+  const RenderList = products.map(product=><ProductCards key={product.id} product={product} setProductToEdit={setProductToEdit}/>)
   const renderInputList=formInputList.map(input=> {
     return (
       <div key={input.name} className="flex flex-col">
@@ -116,13 +122,13 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
      <form className='flex flex-col space-y-3' onSubmit={onSubmitHandler}>
      {renderInputList}
      <CustomListbox selected={selected} setSelected={setSelected}/>
-
-    {tempColors.length > 0 && <div className='flex items-center flex-wrap space-x-1'>
-      {tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}
-    </div>}
     <div className='flex items-center space-x-1 flex-wrap'>
     {renderProductColors}
     </div>
+    {tempColors.length > 0 ? <div className='flex items-center flex-wrap space-x-1'>
+      {tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}
+    </div> : <ErrorMessage msg={validateColor}/>}
+
      <div className='flex items-center space-x-3'>
       <Button className="bg-indigo-600 hover:bg-indigo-700">Submit</Button>
       <Button className="bg-gray-400 hover:bg-gray-500" onClick={onCancel}>Cancel</Button>

@@ -6,14 +6,23 @@ import Button from "./ui/Button"
 
 interface IProps{
 product:IProducts ;
-openModal:()=>void;
+setProductToEdit:(product:IProducts)=>void;
 }
-const ProductCards = ({product,openModal}:IProps) => {
+const ProductCards = ({product,setProductToEdit}:IProps) => {
 
-  const {imageURL,description,title,price,category,colors} = product;
+const {imageURL,description,title,price,category,colors} = product;
 
 // Render
 const renderProductColors=colors.map(color=><CircleColor key={color} color={color}/>)
+
+
+// ---------------   Handlers   ------------------ //
+
+const toEdit = ()=>{
+  setProductToEdit(product)
+}
+
+// ---------------   Handlers   ------------------ //
 
   return (
     <div className='border rounded-md p-2 flex flex-col max-w-sm mx-auto md:max-w-lg  md:mx-0 space-y-3'>
@@ -31,7 +40,7 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
      </div>
 
     <div className='flex items-center justify-between space-x-2 '>
-    <Button type="button" className="bg-indigo-600" onClick={openModal} onBlur={()=>{}} width="w-full">EDIT</Button>
+    <Button type="button" className="bg-indigo-600" width="w-full" onClick={toEdit}>EDIT</Button>
 
     <Button className='bg-red-600' style={{cursor:"pointer"}}>DELETE</Button>
 
