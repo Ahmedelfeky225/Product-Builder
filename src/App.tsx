@@ -33,8 +33,9 @@ const App = () => {
   const [products,setProducts]= useState<IProducts[]>(productList)
   const [selected, setSelected] = useState(categories[0])
   const [validateColor,setValidateColor]= useState("")
-  const [productToEdit,setProductToEdit]=useState(defaultProduct)
+  const [productToEdit,setProductToEdit]=useState<IProducts>(defaultProduct)
 console.log("productToEdit",productToEdit)
+const [isopenEditModal,setEditOpenModal] = useState(false)
   // console.log(products);
 
 console.log(tempColors);
@@ -44,6 +45,9 @@ console.log(products);
 
   const openModal=():void =>setIsOpen(true)
   const closeModal=():void=>setIsOpen(false)
+
+  const openEditModal=():void =>setEditOpenModal(true)
+  const closeEditModal=():void=>setIsOpen(false)
   
   const onChangeHandler=(e:ChangeEvent<HTMLInputElement>):void =>{
     const{value,name} =e.target
@@ -90,7 +94,7 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
 
 //  -----------> Handlers  <---------------   //
 
-  const RenderList = products.map(product=><ProductCards key={product.id} product={product} setProductToEdit={setProductToEdit}/>)
+  const RenderList = products.map(product=><ProductCards key={product.id} product={product} setProductToEdit={setProductToEdit} openEditModal={openEditModal}/>)
   const renderInputList=formInputList.map(input=> {
     return (
       <div key={input.name} className="flex flex-col">
@@ -118,7 +122,29 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
      <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 m-6 gap-2 md:gap-4'>
       {RenderList}
      </div>
+     {/* Add Modal */}
      <Modal openStatus ={isOpen} closeModal={closeModal} title={"Add a New Product"}>
+     <form className='flex flex-col space-y-3' onSubmit={onSubmitHandler}>
+     {renderInputList}
+     <CustomListbox selected={selected} setSelected={setSelected}/>
+    <div className='flex items-center space-x-1 flex-wrap'>
+    {renderProductColors}
+    </div>
+    {tempColors.length > 0 ? <div className='flex items-center flex-wrap space-x-1'>
+      {tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}
+    </div> : <ErrorMessage msg={validateColor}/>}
+
+     <div className='flex items-center space-x-3'>
+      <Button className="bg-indigo-600 hover:bg-indigo-700">Submit</Button>
+      <Button className="bg-gray-400 hover:bg-gray-500" onClick={onCancel}>Cancel</Button>
+      </div>
+     </form>
+    
+      </Modal>
+
+
+        {/* Edit Modal */}
+     <Modal openStatus ={isopenEditModal} closeModal={closeEditModal} title={"Edit This Product"}>
      <form className='flex flex-col space-y-3' onSubmit={onSubmitHandler}>
      {renderInputList}
      <CustomListbox selected={selected} setSelected={setSelected}/>

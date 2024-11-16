@@ -7,8 +7,9 @@ import Button from "./ui/Button"
 interface IProps{
 product:IProducts ;
 setProductToEdit:(product:IProducts)=>void;
+openEditModal:()=>void
 }
-const ProductCards = ({product,setProductToEdit}:IProps) => {
+const ProductCards = ({product,setProductToEdit,openEditModal}:IProps) => {
 
 const {imageURL,description,title,price,category,colors} = product;
 
@@ -20,6 +21,7 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
 
 const toEdit = ()=>{
   setProductToEdit(product)
+  openEditModal()
 }
 
 // ---------------   Handlers   ------------------ //

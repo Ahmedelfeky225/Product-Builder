@@ -1,16 +1,19 @@
 export interface IProductsCategories{
-    id?:string | undefined;
+    id?:string;
     name:string;
     imageURL:string;
 }
 export interface IProducts{
-    id?:string | undefined;
+    id?:string;
     title:string;
     description:string;
     imageURL:string;
     price:string;
     colors:string[];
-    category:IProductsCategories;
+    category:{
+        name:string;
+        imageURL:string;
+    };
 }
 
 
