@@ -1,3 +1,5 @@
+import { TProductNames } from "../types";
+
 export interface IProductsCategories{
     id?:string;
     name:string;
@@ -19,7 +21,7 @@ export interface IProducts{
 
 export interface IInput{
     type:string;
-    name:"title" | "description" | "imageURL" | "price";
+    name:TProductNames;
     id:string;
     label:string;
 }

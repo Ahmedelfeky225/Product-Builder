@@ -10,6 +10,7 @@ import ErrorMessage from './components/ErrorMessage'
 import CircleColor from './components/CircleColor'
 import {v4 as uuid} from "uuid";
 import CustomListbox from './components/ui/CustomListbox'
+import { TProductNames } from './types'
 
 
 
@@ -111,7 +112,7 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
 
 const onSubmitEditHandler=(evt:FormEvent<HTMLFormElement>):void =>{
   evt.preventDefault()
-  const {title,description,imageURL,price} = product;
+  const {title,description,imageURL,price} = productToEdit;
   const errors=productValidation({title,description,imageURL,price})
   console.log(errors)
 
@@ -126,8 +127,7 @@ const onSubmitEditHandler=(evt:FormEvent<HTMLFormElement>):void =>{
       return
     }
     // console.log("Send This Product to the Server...");
-    setProducts(prev=>[{...product,id:uuid(),colors:tempColors,category:selected},...prev])
-    setProduct(defaultProduct)
+    setProductToEdit(defaultProduct)
     setTempColors([])
     setSelected(categories[0])
     closeModal()
@@ -145,6 +145,22 @@ const onSubmitEditHandler=(evt:FormEvent<HTMLFormElement>):void =>{
     )
   }
 )
+
+const renderProductEditWithErrorMsg = (id:string,label:string,name:TProductNames)=>{
+  return (
+    <div className="flex flex-col">
+      <label htmlFor={id} className="mb-[2px] text-sm font-medium text-gray-500">{label}</label>
+      <Input value={productToEdit[name]} type="text" id={id} name={name} onChange={onChangeEditHandler} />
+      <ErrorMessage msg={errors[name]} />
+    </div>
+  );
+}  
+
+
+
+
+ 
+// --------------> Handlers <------------------  //
 const renderProductColors=colors.map(color=><CircleColor key={color} color={color} onClick={()=>{
   if(tempColors.includes(color)){
     setTempColors(prev=>prev.filter(temp=> temp !== color))
@@ -186,16 +202,11 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
         {/* Edit Modal */}
      <Modal openStatus ={isOpenEditModal} closeModal={closeEditModal} title={"Edit This Product"}>
      <form className='flex flex-col space-y-3' onSubmit={onSubmitEditHandler}>
-       <div className="flex flex-col">
-      <label htmlFor={"title"} className="mb-[2px] text-sm font-medium text-gray-500">Product Title</label>
-      <Input value={productToEdit["title"]} type={"text"} id={"title"} name={"title"} onChange={onChangeEditHandler}/>
-      <ErrorMessage msg={""}/>
-  </div>
-        <div className="flex flex-col">
-      <label htmlFor={"description"} className="mb-[2px] text-sm font-medium text-gray-500">Product Description</label>
-      <Input value={productToEdit["description"]} type={"text"} id={"description"} name={"description"} onChange={onChangeEditHandler}/>
-      <ErrorMessage msg={""}/>
-  </div>
+    {renderProductEditWithErrorMsg("title","Product Title","title")}
+    {renderProductEditWithErrorMsg("description","Product Description","description")}
+    {renderProductEditWithErrorMsg("imageURl","Product image URL","imageURL")}
+    {renderProductEditWithErrorMsg("price","Product Price","price")}
+     
 
      {/* <CustomListbox selected={selected} setSelected={setSelected}/> */}
     {/* <div className='flex items-center space-x-1 flex-wrap'>
