@@ -35,7 +35,7 @@ const App = () => {
   const [validateColor,setValidateColor]= useState("")
   const [productToEdit,setProductToEdit]=useState<IProducts>(defaultProduct)
 console.log("productToEdit",productToEdit)
-const [isopenEditModal,setEditOpenModal] = useState(false)
+const [isOpenEditModal,setEditOpenModal] = useState(false)
   // console.log(products);
 
 console.log(tempColors);
@@ -61,6 +61,21 @@ console.log(products);
       [name] : ""
     })
     }
+
+
+ const onChangeEditHandler=(e:ChangeEvent<HTMLInputElement>):void =>{
+  const{value,name} =e.target
+  setProductToEdit({
+    ...productToEdit,
+    [name]:value
+  }
+  )
+  setErrors({
+    ...errors,
+    [name] : ""
+  })
+  }
+
 
 const onCancel= ():void => {
 setProduct(defaultProduct)
@@ -92,6 +107,31 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
     closeModal()
 }
 
+
+
+const onSubmitEditHandler=(evt:FormEvent<HTMLFormElement>):void =>{
+  evt.preventDefault()
+  const {title,description,imageURL,price} = product;
+  const errors=productValidation({title,description,imageURL,price})
+  console.log(errors)
+
+    const hasErrorMsg=Object.values(errors).some(val=>val=== "") && Object.values(errors).every(val=>val=== "") 
+    console.log(hasErrorMsg)
+    if(!hasErrorMsg){
+      setErrors(errors)
+      // return;
+    }
+    if(tempColors.length<1){
+      setValidateColor("Please Choose color at least")
+      return
+    }
+    // console.log("Send This Product to the Server...");
+    setProducts(prev=>[{...product,id:uuid(),colors:tempColors,category:selected},...prev])
+    setProduct(defaultProduct)
+    setTempColors([])
+    setSelected(categories[0])
+    closeModal()
+}
 //  -----------> Handlers  <---------------   //
 
   const RenderList = products.map(product=><ProductCards key={product.id} product={product} setProductToEdit={setProductToEdit} openEditModal={openEditModal}/>)
@@ -144,16 +184,26 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
 
 
         {/* Edit Modal */}
-     <Modal openStatus ={isopenEditModal} closeModal={closeEditModal} title={"Edit This Product"}>
-     <form className='flex flex-col space-y-3' onSubmit={onSubmitHandler}>
-     {renderInputList}
-     <CustomListbox selected={selected} setSelected={setSelected}/>
-    <div className='flex items-center space-x-1 flex-wrap'>
+     <Modal openStatus ={isOpenEditModal} closeModal={closeEditModal} title={"Edit This Product"}>
+     <form className='flex flex-col space-y-3' onSubmit={onSubmitEditHandler}>
+       <div className="flex flex-col">
+      <label htmlFor={"title"} className="mb-[2px] text-sm font-medium text-gray-500">Product Title</label>
+      <Input value={productToEdit["title"]} type={"text"} id={"title"} name={"title"} onChange={onChangeEditHandler}/>
+      <ErrorMessage msg={""}/>
+  </div>
+        <div className="flex flex-col">
+      <label htmlFor={"description"} className="mb-[2px] text-sm font-medium text-gray-500">Product Description</label>
+      <Input value={productToEdit["description"]} type={"text"} id={"description"} name={"description"} onChange={onChangeEditHandler}/>
+      <ErrorMessage msg={""}/>
+  </div>
+
+     {/* <CustomListbox selected={selected} setSelected={setSelected}/> */}
+    {/* <div className='flex items-center space-x-1 flex-wrap'>
     {renderProductColors}
     </div>
     {tempColors.length > 0 ? <div className='flex items-center flex-wrap space-x-1'>
       {tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}
-    </div> : <ErrorMessage msg={validateColor}/>}
+    </div> : <ErrorMessage msg={validateColor}/>} */}
 
      <div className='flex items-center space-x-3'>
       <Button className="bg-indigo-600 hover:bg-indigo-700">Submit</Button>
