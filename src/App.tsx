@@ -35,9 +35,10 @@ const App = () => {
   const [selected, setSelected] = useState(categories[0])
   const [validateColor,setValidateColor]= useState("")
   const [productToEdit,setProductToEdit]=useState<IProducts>(defaultProduct)
-console.log("productToEdit",productToEdit)
-const [isOpenEditModal,setEditOpenModal] = useState(false)
+  const [productToEditIdx,setProductToEditIdx]=useState(0)
+  const [isOpenEditModal,setEditOpenModal] = useState(false)
   // console.log(products);
+console.log("productToEdit",productToEdit)
 
 console.log(tempColors);
 console.log(products);
@@ -48,7 +49,7 @@ console.log(products);
   const closeModal=():void=>setIsOpen(false)
 
   const openEditModal=():void =>setEditOpenModal(true)
-  const closeEditModal=():void=>setIsOpen(false)
+  const closeEditModal=():void=>setEditOpenModal(false)
   
   const onChangeHandler=(e:ChangeEvent<HTMLInputElement>):void =>{
     const{value,name} =e.target
@@ -120,21 +121,44 @@ const onSubmitEditHandler=(evt:FormEvent<HTMLFormElement>):void =>{
     console.log(hasErrorMsg)
     if(!hasErrorMsg){
       setErrors(errors)
-      // return;
+      return;
     }
-    if(tempColors.length<1){
-      setValidateColor("Please Choose color at least")
-      return
-    }
-    // console.log("Send This Product to the Server...");
-    setProductToEdit(defaultProduct)
+    // if(tempColors.length<1){
+    //   setValidateColor("Please Choose color at least")
+    //   return
+    // }
+    // console.log("Update This Product to the Server...");
+// دي طرق شائعه انا عملتها للتعديل علي المنتجات اول طريقه وتاني طريقه انا اللي عملهم 
+//اما الطريقه التالته دي طريقه الكورس 
+// (1)
+// if(productToEdit.id ){
+//   setProducts(prev=>prev.map(product=>{
+//     if(product.id === productToEdit.id){
+//       return productToEdit;
+//     }else{
+//       return product;
+//     }
+// }))
+// }
+
+// (2)
+
+// setProducts(prev=>prev.map((product,idx)=>idx === indexProductCard ? productToEdit:product))
+
+  // (3)
+
+const updateProducts = [...products]
+products[productToEditIdx]= productToEdit
+setProducts(updateProducts)
+
+setProductToEdit(defaultProduct)
     setTempColors([])
     setSelected(categories[0])
-    closeModal()
+    closeEditModal()
 }
 //  -----------> Handlers  <---------------   //
 
-  const RenderList = products.map(product=><ProductCards key={product.id} product={product} setProductToEdit={setProductToEdit} openEditModal={openEditModal}/>)
+  const RenderList = products.map((product,idx)=><ProductCards  product={product} setProductToEdit={setProductToEdit} openEditModal={openEditModal} idx={idx} setProductToEditIdx={setProductToEditIdx}/>)
   const renderInputList=formInputList.map(input=> {
     return (
       <div key={input.name} className="flex flex-col">
@@ -200,7 +224,7 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
 
 
         {/* Edit Modal */}
-     <Modal openStatus ={isOpenEditModal} closeModal={closeEditModal} title={"Edit This Product"}>
+     <Modal openStatus={isOpenEditModal} closeModal={closeEditModal} title={"Edit This Product"}>
      <form className='flex flex-col space-y-3' onSubmit={onSubmitEditHandler}>
     {renderProductEditWithErrorMsg("title","Product Title","title")}
     {renderProductEditWithErrorMsg("description","Product Description","description")}

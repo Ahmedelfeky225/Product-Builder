@@ -8,8 +8,10 @@ interface IProps{
 product:IProducts ;
 setProductToEdit:(product:IProducts)=>void;
 openEditModal:()=>void
+idx:number;
+setProductToEditIdx:(idx:number)=>void
 }
-const ProductCards = ({product,setProductToEdit,openEditModal}:IProps) => {
+const ProductCards = ({product,setProductToEdit,openEditModal,setProductToEditIdx,idx}:IProps) => {
 
 const {imageURL,description,title,price,category,colors} = product;
 
@@ -22,6 +24,7 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
 const toEdit = ()=>{
   setProductToEdit(product)
   openEditModal()
+  setProductToEditIdx(idx)
 }
 
 // ---------------   Handlers   ------------------ //
