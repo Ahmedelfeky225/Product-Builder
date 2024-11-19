@@ -5,7 +5,7 @@ className?:string;
 width?:"w-fit" | "w-full";
 }
 const Button = ({children,className,width="w-full",...rest}:IProps) => {
-    console.log({rest})
+    // console.log({rest})
   return (
     <button className={`${className} ${width} text-white p-2  rounded-lg cursor-pointer`} {...rest} >{children}</button>
   )

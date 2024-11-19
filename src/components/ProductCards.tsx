@@ -36,7 +36,7 @@ const toEdit = ()=>{
       <p className="text-xs text-gray-500 break-words">
       {txtSlicer(description)}
       </p>
-      <div className='flex items-center space-x-2 my-4'>
+      <div className='flex items-center space-x-2 my-4 flex-wrap'>
         {renderProductColors}
       </div>
      <div className='flex items-center justify-between'>

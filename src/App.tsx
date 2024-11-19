@@ -38,10 +38,10 @@ const App = () => {
   const [productToEditIdx,setProductToEditIdx]=useState(0)
   const [isOpenEditModal,setEditOpenModal] = useState(false)
   // console.log(products);
-console.log("productToEdit",productToEdit)
+// console.log("productToEdit",productToEdit)
 
-console.log(tempColors);
-console.log(products);
+console.log("tempColors",tempColors);
+// console.log(products);
 
 //  -----------> Handlers  <---------------   //
 
@@ -95,7 +95,7 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
     console.log(hasErrorMsg)
     if(!hasErrorMsg){
       setErrors(errors)
-      // return;
+      return;
     }
     if(tempColors.length<1){
       setValidateColor("Please Choose color at least")
@@ -121,12 +121,12 @@ const onSubmitEditHandler=(evt:FormEvent<HTMLFormElement>):void =>{
     console.log(hasErrorMsg)
     if(!hasErrorMsg){
       setErrors(errors)
-      return;
+      return
     }
-    // if(tempColors.length<1){
-    //   setValidateColor("Please Choose color at least")
-    //   return
-    // }
+    if(productToEdit.colors.length<1){
+      setValidateColor("Please Choose color at least")
+      return
+    }
     // console.log("Update This Product to the Server...");
 // دي طرق شائعه انا عملتها للتعديل علي المنتجات اول طريقه وتاني طريقه انا اللي عملهم 
 //اما الطريقه التالته دي طريقه الكورس 
@@ -158,6 +158,8 @@ setProductToEdit(defaultProduct)
 }
 //  -----------> Handlers  <---------------   //
 
+// ------------> Renders  <----------------
+
   const RenderList = products.map((product,idx)=><ProductCards key={product.id}  product={product} setProductToEdit={setProductToEdit} openEditModal={openEditModal} idx={idx} setProductToEditIdx={setProductToEditIdx}/>)
   const renderInputList=formInputList.map(input=> {
     return (
@@ -169,6 +171,21 @@ setProductToEdit(defaultProduct)
     )
   }
 )
+const renderProductColors=colors.map(color=><CircleColor key={color} color={color} onClick={()=>{
+  if(tempColors.includes(color)){
+    setTempColors(prev=>prev.filter(temp=> temp !== color))
+    return
+  }
+  setTempColors(prev=>[...prev,color])
+  const {colors}=productToEdit
+  if(colors.includes(color)){
+    setProductToEdit((prev:IProducts)=>{
+      return {...prev,colors:colors.filter(temp=>temp !== color)}
+    })
+  }else{
+    setProductToEdit((prev:IProducts)=>({...prev,colors:[...colors,color]}))
+  }
+}}/>)
 
 const renderProductEditWithErrorMsg = (id:string,label:string,name:TProductNames)=>{
   return (
@@ -179,19 +196,14 @@ const renderProductEditWithErrorMsg = (id:string,label:string,name:TProductNames
     </div>
   );
 }  
+// const renderProductEditCircleColors=colors.map(color=><CircleColor key={color} color={color} onClick={()=>{
+
+  
+// }}/>)
 
 
 
-
- 
-// --------------> Handlers <------------------  //
-const renderProductColors=colors.map(color=><CircleColor key={color} color={color} onClick={()=>{
-  if(tempColors.includes(color)){
-    setTempColors(prev=>prev.filter(temp=> temp !== color))
-    return
-  }
-  setTempColors(prev=>[...prev,color])
-}}/>)
+// --------------> Renders <------------------  //
 
 
   return (
@@ -207,12 +219,13 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
      <form className='flex flex-col space-y-3' onSubmit={onSubmitHandler}>
      {renderInputList}
      <CustomListbox selected={selected} setSelected={setSelected}/>
-    <div className='flex items-center space-x-1 flex-wrap'>
-    {renderProductColors}
-    </div>
     {tempColors.length > 0 ? <div className='flex items-center flex-wrap space-x-1'>
       {tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}
     </div> : <ErrorMessage msg={validateColor}/>}
+
+    <div className='flex items-center space-x-1 flex-wrap'>
+    {renderProductColors}
+    </div>
 
      <div className='flex items-center space-x-3'>
       <Button className="bg-indigo-600 hover:bg-indigo-700">Submit</Button>
@@ -233,12 +246,14 @@ const renderProductColors=colors.map(color=><CircleColor key={color} color={colo
      
 
      {/* <CustomListbox selected={selected} setSelected={setSelected}/> */}
-    {/* <div className='flex items-center space-x-1 flex-wrap'>
+    
+    {productToEdit.colors.length > 0 ? <div className='flex items-center flex-wrap space-x-1'>
+      {productToEdit.colors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}
+    </div> : <ErrorMessage msg={validateColor}/>} 
+
+    {<div className='flex items-center space-x-1 flex-wrap'>
     {renderProductColors}
-    </div>
-    {tempColors.length > 0 ? <div className='flex items-center flex-wrap space-x-1'>
-      {tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}
-    </div> : <ErrorMessage msg={validateColor}/>} */}
+    </div>}
 
      <div className='flex items-center space-x-3'>
       <Button className="bg-indigo-600 hover:bg-indigo-700">Submit</Button>
