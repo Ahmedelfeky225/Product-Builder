@@ -148,17 +148,17 @@ const onSubmitEditHandler=(evt:FormEvent<HTMLFormElement>):void =>{
   // (3)
 
 const updateProducts = [...products]
-products[productToEditIdx]= productToEdit
+updateProducts[productToEditIdx]= productToEdit
 setProducts(updateProducts)
 
 setProductToEdit(defaultProduct)
     setTempColors([])
-    setSelected(categories[0])
+    // setSelected(categories[0])
     closeEditModal()
 }
 //  -----------> Handlers  <---------------   //
 
-  const RenderList = products.map((product,idx)=><ProductCards  product={product} setProductToEdit={setProductToEdit} openEditModal={openEditModal} idx={idx} setProductToEditIdx={setProductToEditIdx}/>)
+  const RenderList = products.map((product,idx)=><ProductCards key={product.id}  product={product} setProductToEdit={setProductToEdit} openEditModal={openEditModal} idx={idx} setProductToEditIdx={setProductToEditIdx}/>)
   const renderInputList=formInputList.map(input=> {
     return (
       <div key={input.name} className="flex flex-col">
