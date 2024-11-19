@@ -11,7 +11,7 @@ openEditModal:()=>void
 idx:number;
 setProductToEditIdx:(idx:number)=>void
 }
-const ProductCards = ({product,setProductToEdit,openEditModal,setProductToEditIdx,idx}:IProps) => {
+const ProductCards = ({product,setProductToEdit,openEditModal,idx,setProductToEditIdx}:IProps) => {
 
 const {imageURL,description,title,price,category,colors} = product;
 

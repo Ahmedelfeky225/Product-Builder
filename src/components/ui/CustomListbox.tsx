@@ -2,9 +2,9 @@
 
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-import { categories, productList } from '../../data'
+import { categories } from '../../data'
 import { IProductsCategories } from '../../interfaces';
-console.log(productList);
+// console.log(productList);
 interface IProps {
   selected : IProductsCategories;
   setSelected:(category:IProductsCategories) => void;
