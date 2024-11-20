@@ -4,12 +4,14 @@ import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@h
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { categories, productList } from '../../data'
 import { IProductsCategories } from '../../interfaces';
-// console.log(productList);
+console.log(productList);
 interface IProps {
-  selected : IProductsCategories;
+  selected : {name:string,imageURL:string};
   setSelected:(category:IProductsCategories) => void;
 }
 const CustomListbox=({selected,setSelected}:IProps)=> {
+
+
 
   return (
     <Listbox value={selected} onChange={setSelected}>

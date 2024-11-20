@@ -32,7 +32,7 @@ const App = () => {
   const [errors,setErrors]=useState({ title:"",description:"",imageURL:"",price:"",})
   const [tempColors,setTempColors] = useState<string[]>([])
   const [products,setProducts]= useState<IProducts[]>(productList)
-  const [selected, setSelected] = useState(categories[0])
+  const [selectedCategory, setSelectedCategory] = useState(categories[0])
   const [validateColor,setValidateColor]= useState("")
   const [productToEdit,setProductToEdit]=useState<IProducts>(defaultProduct)
   const [productToEditIdx,setProductToEditIdx]=useState(0)
@@ -102,10 +102,10 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
       return
     }
     // console.log("Send This Product to the Server...");
-    setProducts(prev=>[{...product,id:uuid(),colors:tempColors,category:selected},...prev])
+    setProducts(prev=>[{...product,id:uuid(),colors:tempColors,category:selectedCategory},...prev])
     setProduct(defaultProduct)
     setTempColors([])
-    setSelected(categories[0])
+    setSelectedCategory(categories[0])
     closeModal()
 }
 
@@ -153,7 +153,7 @@ setProducts(updateProducts)
 
 setProductToEdit(defaultProduct)
     setTempColors([])
-    // setSelected(categories[0])
+    setSelectedCategory(categories[0])
     closeEditModal()
 }
 //  -----------> Handlers  <---------------   //
@@ -218,7 +218,7 @@ const renderProductEditWithErrorMsg = (id:string,label:string,name:TProductNames
      <Modal openStatus ={isOpen} closeModal={closeModal} title={"Add a New Product"}>
      <form className='flex flex-col space-y-3' onSubmit={onSubmitHandler}>
      {renderInputList}
-     <CustomListbox selected={selected} setSelected={setSelected}/>
+     <CustomListbox selected={selectedCategory} setSelected={setSelectedCategory}/>
     {tempColors.length > 0 ? <div className='flex items-center flex-wrap space-x-1'>
       {tempColors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}
     </div> : <ErrorMessage msg={validateColor}/>}
@@ -245,7 +245,7 @@ const renderProductEditWithErrorMsg = (id:string,label:string,name:TProductNames
     {renderProductEditWithErrorMsg("price","Product Price","price")}
      
 
-     {/* <CustomListbox selected={selected} setSelected={setSelected}/> */}
+     <CustomListbox selected={productToEdit.category} setSelected={val=>setProductToEdit({...productToEdit,category:val})}/>
     
     {productToEdit.colors.length > 0 ? <div className='flex items-center flex-wrap space-x-1'>
       {productToEdit.colors.map(color=><span key={color} className='p-1 rounded-md text-white text-xs mr-1 mb-1' style={{background:color}}>{color}</span>)}

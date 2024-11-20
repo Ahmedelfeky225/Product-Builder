@@ -21,7 +21,7 @@ export const productList :IProducts[]= [
         price: "12.000",
         colors: ["#000000", "#696969", "#808080", "#FFD700"],
         category: {
-            name: "Electronics",
+            name: "Screens",
             imageURL: "https://img.freepik.com/premium-photo/flat-screen-tv-with-sunset-top_1236203-8107.jpg?ga=GA1.1.1891406925.1730442969&semt=ais_hybrid",
         },
     },
@@ -33,8 +33,8 @@ export const productList :IProducts[]= [
             price: "35.500",
             colors: ["#000080", "#B22222", "#FF8C00", "#8A2BE2"],
             category: {
-                name: "Computers",
-                imageURL: "https://img.freepik.com/premium-photo/laptop-with-video-game-screen-fire-screen_1277297-29001.jpg?w=740",
+                name: "Gaming consoles",
+                imageURL: "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             },
         },
         {
@@ -46,7 +46,7 @@ export const productList :IProducts[]= [
             colors: ["#FF0000", "#0000FF", "#FFFF00", "#000000"],
             category: {
                 name: "Cars",
-                imageURL: "https://img.freepik.com/free-photo/yellow-car-gas-station_23-2150697544.jpg?t=st=1730533412~exp=1730537012~hmac=74ce28e27c31ad82380cf228bac659faf091b7758e6c54d06feaef581bab8b3c&w=740",
+                imageURL: "https://img.freepik.com/free-photo/white-coupe-sport-car-standing-road-front-view_114579-4005.jpg?t=st=1730533056~exp=1730536656~hmac=5d5634dbfadcb8d711c177629862fac66062f709feba289b2e355501b75b848e&w=740",
             },
         }
         
@@ -118,6 +118,11 @@ export const categories:IProductsCategories[] = [
   },
   {
     id: uuid(),
+    name:"Cars",
+    imageURL:"https://img.freepik.com/free-photo/white-coupe-sport-car-standing-road-front-view_114579-4005.jpg?t=st=1730533056~exp=1730536656~hmac=5d5634dbfadcb8d711c177629862fac66062f709feba289b2e355501b75b848e&w=740",
+    },
+  {
+    id: uuid(),
     name: "Clothes",
     imageURL: "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWxmfHx8fHx8fHwxNjY4MjE4MDM2&auto=format&fit=crop&w=800&q=60",
   },
@@ -156,4 +161,9 @@ export const categories:IProductsCategories[] = [
     name: "Gaming Consoles",
     imageURL: "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
+ { 
+    id: uuid(),
+    name: "Screens",
+    imageURL: "https://img.freepik.com/premium-photo/flat-screen-tv-with-sunset-top_1236203-8107.jpg?ga=GA1.1.1891406925.1730442969&semt=ais_hybrid",
+},
 ];

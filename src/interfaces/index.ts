@@ -1,7 +1,7 @@
 import { TProductNames } from "../types";
 
 export interface IProductsCategories{
-    id?:string;
+    id:string;
     name:string;
     imageURL:string;
 }

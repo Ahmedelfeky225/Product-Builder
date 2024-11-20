@@ -9,7 +9,7 @@ product:IProducts ;
 setProductToEdit:(product:IProducts)=>void;
 openEditModal:()=>void
 idx:number;
-setProductToEditIdx:(idx:number)=>void
+setProductToEditIdx:(idx:number)=>void;
 }
 const ProductCards = ({product,setProductToEdit,openEditModal,setProductToEditIdx,idx}:IProps) => {
 
