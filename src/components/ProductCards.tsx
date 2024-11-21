@@ -10,8 +10,9 @@ setProductToEdit:(product:IProducts)=>void;
 openEditModal:()=>void
 idx:number;
 setProductToEditIdx:(idx:number)=>void;
+openConfirmModal:()=>void
 }
-const ProductCards = ({product,setProductToEdit,openEditModal,setProductToEditIdx,idx}:IProps) => {
+const ProductCards = ({product,setProductToEdit,openEditModal,setProductToEditIdx,idx, openConfirmModal}:IProps) => {
 
 const {imageURL,description,title,price,category,colors} = product;
 
@@ -27,6 +28,11 @@ const toEdit = ()=>{
   setProductToEditIdx(idx)
 }
 
+const onRemove =()=>{
+  openConfirmModal()
+  setProductToEdit(product)
+  setProductToEditIdx(idx)
+}
 // ---------------   Handlers   ------------------ //
 
   return (
@@ -45,9 +51,9 @@ const toEdit = ()=>{
      </div>
 
     <div className='flex items-center justify-between space-x-2 '>
-    <Button type="button" className="bg-indigo-600" width="w-full" onClick={toEdit}>EDIT</Button>
+    <Button type="button" className="bg-indigo-600 font-medium duration-200 hover:bg-indigo-700" width="w-full" onClick={toEdit}>EDIT</Button>
 
-    <Button className='bg-red-600' style={{cursor:"pointer"}}>DELETE</Button>
+    <Button className='bg-red-600 font-medium duration-200 hover:bg-red-800 'style={{cursor:"pointer"}} onClick={onRemove}>Destroy</Button>
 
     </div>
     </div>

@@ -11,6 +11,7 @@ import CircleColor from './components/CircleColor'
 import {v4 as uuid} from "uuid";
 import CustomListbox from './components/ui/CustomListbox'
 import { TProductNames } from './types'
+import toast, { Toaster } from 'react-hot-toast'
 
 
 
@@ -37,6 +38,7 @@ const App = () => {
   const [productToEdit,setProductToEdit]=useState<IProducts>(defaultProduct)
   const [productToEditIdx,setProductToEditIdx]=useState(0)
   const [isOpenEditModal,setEditOpenModal] = useState(false)
+  const [isOpenConfirmModal,setOpenConfirmModal] = useState(false)
   // console.log(products);
 // console.log("productToEdit",productToEdit)
 
@@ -50,7 +52,9 @@ console.log("tempColors",tempColors);
 
   const openEditModal=():void =>setEditOpenModal(true)
   const closeEditModal=():void=>setEditOpenModal(false)
-  
+
+  const openConfirmModal=():void =>setOpenConfirmModal(true)
+  const closeConfirmModal=():void=>setOpenConfirmModal(false)
   const onChangeHandler=(e:ChangeEvent<HTMLInputElement>):void =>{
     const{value,name} =e.target
     setProduct({
@@ -83,6 +87,27 @@ const onCancel= ():void => {
 setProduct(defaultProduct)
 closeModal()
 }
+
+
+
+const removeProductHandler =()=>{
+  // const removeProducts = [...products]
+  // removeProducts.splice(productToEditIdx,1)
+  // setProducts(removeProducts)
+ 
+  console.log("Product ID",productToEdit.id)
+
+  // setProducts((prev)=>prev.filter(product=>product.id !== productToEdit.id))   
+
+  const filteredProducts = products.filter(product=>product.id !== productToEdit.id)
+  setProducts(filteredProducts)
+  closeConfirmModal()
+  toast('Product has been deleted',{icon: '👏', style: {
+    backgroundColor:"#000",
+    color:"#fff"
+  },});
+}
+
 
 
 const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
@@ -160,7 +185,7 @@ setProductToEdit(defaultProduct)
 
 // ------------> Renders  <----------------
 
-  const RenderList = products.map((product,idx)=><ProductCards key={product.id}  product={product} setProductToEdit={setProductToEdit} openEditModal={openEditModal} idx={idx} setProductToEditIdx={setProductToEditIdx}/>)
+  const RenderList = products.map((product,idx)=><ProductCards key={product.id}  product={product} setProductToEdit={setProductToEdit} openEditModal={openEditModal} idx={idx} setProductToEditIdx={setProductToEditIdx} openConfirmModal={openConfirmModal}/>)
   const renderInputList=formInputList.map(input=> {
     return (
       <div key={input.name} className="flex flex-col">
@@ -207,12 +232,12 @@ const renderProductEditWithErrorMsg = (id:string,label:string,name:TProductNames
 
 
   return (
-    <div className='container'>
+    <main className='container'>
       <div className='flex justify-center'>
       <Button className='bg-indigo-600 px-7 py-2 mt-2 mx-auto hover:bg-indigo-700' width='w-fit' onClick={openModal}>Build Project</Button>
       </div>
-     <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 m-6 gap-2 md:gap-4'>
-      {RenderList}
+      <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 m-6 gap-2 md:gap-4'>
+       {RenderList}
      </div>
      {/* Add Modal */}
      <Modal openStatus ={isOpen} closeModal={closeModal} title={"Add a New Product"}>
@@ -262,7 +287,22 @@ const renderProductEditWithErrorMsg = (id:string,label:string,name:TProductNames
      </form>
     
       </Modal>
-    </div>
+
+      {/* Remove Modal */}
+      <Modal openStatus={isOpenConfirmModal} closeModal={closeConfirmModal} title={"Are you sure you want to remove this product from your Store?"}>
+        
+      <p className='mb-4 text-gray-500 leading-6 text-sm'>
+          Deleting this product will remove it permanently from your inventory. Any associated data, sales history,
+          and other related information will also be deleted. Please make sure this is the intended action.
+      </p>
+  
+      <div className='flex items-center space-x-3'>
+      <Button className="bg-red-500 duration-200 hover:bg-red-800 py-3 font-medium" onClick={removeProductHandler}>Yes, remove</Button>
+      <Button className="bg-gray-100 duration-200 hover:bg-gray-300 text-black font-medium py-3" onClick={closeConfirmModal}>Cancel</Button>
+      </div>
+      </Modal>
+      <Toaster />
+    </main>
   )
 }
 

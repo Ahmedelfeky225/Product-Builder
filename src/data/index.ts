@@ -48,9 +48,55 @@ export const productList :IProducts[]= [
                 name: "Cars",
                 imageURL: "https://img.freepik.com/free-photo/white-coupe-sport-car-standing-road-front-view_114579-4005.jpg?t=st=1730533056~exp=1730536656~hmac=5d5634dbfadcb8d711c177629862fac66062f709feba289b2e355501b75b848e&w=740",
             },
-        }
-        
-    
+        },
+        {
+          id:uuid(),
+          title:"Luxury Sports Car",
+          description: "A luxury sports car that combines high performance with sleek design, equipped with a powerful engine",
+          imageURL:"https://img.freepik.com/free-photo/white-coupe-sport-car-standing-road-front-view_114579-4005.jpg?t=st=1730533056~exp=1730536656~hmac=5d5634dbfadcb8d711c177629862fac66062f709feba289b2e355501b75b848e&w=740",
+          price:" 500.000",
+          colors:["#FF5733", "#33FF57", "#3357FF", "#FFC300"],
+          category:{
+              name:"Cars",
+              imageURL:"https://img.freepik.com/free-photo/white-coupe-sport-car-standing-road-front-view_114579-4005.jpg?t=st=1730533056~exp=1730536656~hmac=5d5634dbfadcb8d711c177629862fac66062f709feba289b2e355501b75b848e&w=740",
+              },
+      },
+      {
+          id: uuid(),
+          title: "Smart LED TV",
+          description: "A 55-inch 4K Ultra HD Smart LED TV that offers vibrant colors, deep contrasts, and a seamless streaming experience. ",
+          imageURL: "https://img.freepik.com/premium-photo/flat-screen-tv-is-table-with-beach-scene-it_1150321-4970.jpg?ga=GA1.1.1891406925.1730442969&semt=ais_hybrid",
+          price: "12.000",
+          colors: ["#000000", "#696969", "#808080", "#FFD700"],
+          category: {
+              name: "Screens",
+              imageURL: "https://img.freepik.com/premium-photo/flat-screen-tv-with-sunset-top_1236203-8107.jpg?ga=GA1.1.1891406925.1730442969&semt=ais_hybrid",
+          },
+      },
+      {
+        id:uuid(),
+        title:"Luxury Sports Car",
+        description: "A luxury sports car that combines high performance with sleek design, equipped with a powerful engine",
+        imageURL:"https://img.freepik.com/free-photo/white-coupe-sport-car-standing-road-front-view_114579-4005.jpg?t=st=1730533056~exp=1730536656~hmac=5d5634dbfadcb8d711c177629862fac66062f709feba289b2e355501b75b848e&w=740",
+        price:" 500.000",
+        colors:["#FF5733", "#33FF57", "#3357FF", "#FFC300"],
+        category:{
+            name:"Cars",
+            imageURL:"https://img.freepik.com/free-photo/white-coupe-sport-car-standing-road-front-view_114579-4005.jpg?t=st=1730533056~exp=1730536656~hmac=5d5634dbfadcb8d711c177629862fac66062f709feba289b2e355501b75b848e&w=740",
+            },
+    },
+    {
+        id: uuid(),
+        title: "Smart LED TV",
+        description: "A 55-inch 4K Ultra HD Smart LED TV that offers vibrant colors, deep contrasts, and a seamless streaming experience. ",
+        imageURL: "https://img.freepik.com/premium-photo/flat-screen-tv-is-table-with-beach-scene-it_1150321-4970.jpg?ga=GA1.1.1891406925.1730442969&semt=ais_hybrid",
+        price: "12.000",
+        colors: ["#000000", "#696969", "#808080", "#FFD700"],
+        category: {
+            name: "Screens",
+            imageURL: "https://img.freepik.com/premium-photo/flat-screen-tv-with-sunset-top_1236203-8107.jpg?ga=GA1.1.1891406925.1730442969&semt=ais_hybrid",
+        },
+    },
 ]
 
 export const formInputList:IInput[]=[
