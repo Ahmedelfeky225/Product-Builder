@@ -1,5 +1,5 @@
 import { IProducts } from "../interfaces";
-import { txtSlicer } from "../utils/functions";
+import { numberWithCommas, txtSlicer } from "../utils/functions";
 import CircleColor from "./CircleColor";
 import ImageCard from "./ImageCard"
 import Button from "./ui/Button"
@@ -46,12 +46,15 @@ const onRemove =()=>{
         {renderProductColors}
       </div>
      <div className='flex items-center justify-between'>
-     <span className="text-lg text-indigo-600 font-semibold">${price}</span>
+     <span className="text-lg text-indigo-600 font-semibold">${numberWithCommas(price)}</span>
+     <div className="flex items-center space-x-2">
+     <span className="font-medium text-sm">{category.name}</span>
      <ImageCard imageLink={category.imageURL} alt={category.name} className="rounded-full w-10 h-10 object-bottom"/>
+     </div>
      </div>
 
     <div className='flex items-center justify-between space-x-2 '>
-    <Button type="button" className="bg-indigo-600 font-medium duration-200 hover:bg-indigo-700" width="w-full" onClick={toEdit}>EDIT</Button>
+    <Button type="button" className="bg-indigo-600 duration-200 hover:bg-indigo-700" width="w-full" onClick={toEdit}>EDIT</Button>
 
     <Button className='bg-red-600 font-medium duration-200 hover:bg-red-800 'style={{cursor:"pointer"}} onClick={onRemove}>Destroy</Button>
 

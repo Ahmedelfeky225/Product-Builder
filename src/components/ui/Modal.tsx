@@ -1,12 +1,13 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment,ReactNode } from 'react'
 interface IProps {
-    title:string;
+    title?:string;
     openStatus:boolean;
     closeModal: ()=>void;
     children:ReactNode;
+    description?:string;
 }
-export default function MyModal({title,openStatus,closeModal,children}:IProps) {
+export default function MyModal({title,openStatus,closeModal,children,description}:IProps) {
  
   return (
     <>
@@ -44,8 +45,8 @@ export default function MyModal({title,openStatus,closeModal,children}:IProps) {
                   >
                     {title}
                   </Dialog.Title>
-
-                  <div>
+                  {description && <p className='text-sm text-gray-500 mt-3'>{description}</p>}
+                  <div className='mt-4'>
                   {children}
                   </div>
                 </Dialog.Panel>

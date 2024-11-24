@@ -118,20 +118,35 @@ const onSubmitHandler=(evt:FormEvent<HTMLFormElement>):void =>{
 
     const hasErrorMsg=Object.values(errors).some(val=>val=== "") && Object.values(errors).every(val=>val=== "") 
     console.log(hasErrorMsg)
+    
+    let isValid = true;
+
     if(!hasErrorMsg){
       setErrors(errors)
-      return;
+      isValid= false;
     }
     if(tempColors.length<1){
       setValidateColor("Please Choose color at least")
-      return
+      isValid = false;
     }
+
+    // بهذه الطريقة، يتم استخدام متغير isValid لتحديد ما إذا كان يجب متابعة التنفيذ أم لا، مما يجعل نقاط الخروج موحدة.
+
+// الاستنتاج:
+// وجود return مع الشروط ليس عيبًا في حال كان الكود واضحًا وسهل القراءة. إذا كنت ترى أنه يزيد من تعقيد الكود، يمكنك التفكير في هيكلة الكود بطريقة تقلل الاعتماد عليه.
+
+    if(!isValid) return 
     // console.log("Send This Product to the Server...");
     setProducts(prev=>[{...product,id:uuid(),colors:tempColors,category:selectedCategory},...prev])
     setProduct(defaultProduct)
     setTempColors([])
     setSelectedCategory(categories[0])
     closeModal()
+
+    toast('product has been successfully added',{icon: '👏', style: {
+      backgroundColor:"#000",
+      color:"#fff"
+    },});
 }
 
 
@@ -180,6 +195,11 @@ setProductToEdit(defaultProduct)
     setTempColors([])
     setSelectedCategory(categories[0])
     closeEditModal()
+
+    toast('Product has been Updated',{icon: '👏', style: {
+      backgroundColor:"#000",
+      color:"#fff"
+    },});
 }
 //  -----------> Handlers  <---------------   //
 
@@ -234,7 +254,7 @@ const renderProductEditWithErrorMsg = (id:string,label:string,name:TProductNames
   return (
     <main className='container'>
       <div className='flex justify-center'>
-      <Button className='bg-indigo-600 px-7 py-2 mt-2 mx-auto hover:bg-indigo-700' width='w-fit' onClick={openModal}>Build Project</Button>
+      <Button className='bg-indigo-500 hover:bg-indigo-600  px-5  mt-5 mx-auto ' width='w-fit' onClick={openModal}>Build a Project</Button>
       </div>
       <div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 m-6 gap-2 md:gap-4'>
        {RenderList}
@@ -253,8 +273,8 @@ const renderProductEditWithErrorMsg = (id:string,label:string,name:TProductNames
     </div>
 
      <div className='flex items-center space-x-3'>
-      <Button className="bg-indigo-600 hover:bg-indigo-700">Submit</Button>
-      <Button className="bg-gray-400 hover:bg-gray-500" onClick={onCancel}>Cancel</Button>
+      <Button className="bg-indigo-500 hover:bg-indigo-600 font-medium">Submit</Button>
+      <Button type='button' className="bg-[#f5f5fa] hover:bg-gray-300 text-[#000] font-medium" onClick={onCancel}>Cancel</Button>
       </div>
      </form>
     
@@ -281,24 +301,22 @@ const renderProductEditWithErrorMsg = (id:string,label:string,name:TProductNames
     </div>}
 
      <div className='flex items-center space-x-3'>
-      <Button className="bg-indigo-600 hover:bg-indigo-700">Submit</Button>
-      <Button className="bg-gray-400 hover:bg-gray-500" onClick={onCancel}>Cancel</Button>
+      <Button className="bg-indigo-500 hover:bg-indigo-600 font-medium">Submit</Button>
+      <Button type='button' className="bg-[#f5f5fa]  hover:bg-gray-300 text-[#000] font-medium " onClick={closeEditModal}>Cancel</Button>
       </div>
      </form>
     
       </Modal>
 
       {/* Remove Modal */}
-      <Modal openStatus={isOpenConfirmModal} closeModal={closeConfirmModal} title={"Are you sure you want to remove this product from your Store?"}>
-        
-      <p className='mb-4 text-gray-500 leading-6 text-sm'>
-          Deleting this product will remove it permanently from your inventory. Any associated data, sales history,
-          and other related information will also be deleted. Please make sure this is the intended action.
-      </p>
+      <Modal openStatus={isOpenConfirmModal} closeModal={closeConfirmModal}
+      description='  Deleting this product will remove it permanently from your inventory. Any associated data, sales history,
+          and other related information will also be deleted. Please make sure this is the intended action.'
+      title={"Are you sure you want to remove this product from your Store?"}>
   
       <div className='flex items-center space-x-3'>
-      <Button className="bg-red-500 duration-200 hover:bg-red-800 py-3 font-medium" onClick={removeProductHandler}>Yes, remove</Button>
-      <Button className="bg-gray-100 duration-200 hover:bg-gray-300 text-black font-medium py-3" onClick={closeConfirmModal}>Cancel</Button>
+      <Button className="bg-[#c2344d]  hover:bg-red-800" onClick={removeProductHandler}>Yes, remove</Button>
+      <Button className="bg-[#f5f5fa]  hover:bg-gray-300 text-[#000]" onClick={closeConfirmModal}>Cancel</Button>
       </div>
       </Modal>
       <Toaster />
